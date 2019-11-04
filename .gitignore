@@ -1,8 +1,11 @@
 # Environments
 .env
+.flaskenv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
 # pycharm
 .idea/
+
+migrations/
