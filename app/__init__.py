@@ -5,7 +5,7 @@ from app.config import config
 from app.blueprints.auth import auth_bp
 from app.blueprints.admin import admin_bp
 from app.blueprints.blog import blog_bp
-from app.extentions import bootstrap,db,moment,ckeditor
+from app.extentions import *
 from flask_migrate import Migrate
 from app.models import *
 from app.commands import *
@@ -37,6 +37,7 @@ def register_extentions(app):
     moment.init_app(app)
     ckeditor.init_app(app)
     migrate = Migrate(app,db)
+    toolbar.init_app(app)
 
 def register_blueprints(app):
     app.register_blueprint(blog_bp)
@@ -47,7 +48,12 @@ def register_shell_context(app):
     pass
 
 def register_template_context(app):
-    pass
+    @app.context_processor
+    def make_template_context():
+        admin = Admin.query.first()
+        bloginfo = Bloginfo.query.first()
+        categories = Category.query.order_by(Category.name).all()
+        return dict(admin=admin,bloginfo=bloginfo,categories=categories)
 
 def register_errors(app):
     @app.errorhandler(400)

@@ -9,6 +9,8 @@ class BaseConfig(object):
     APP_MANEGE_POST_PER_PAGE = 15
     APP_COMMENT_PER_PAGE = 15
 
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
+
 class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:123456@localhost:3306/myblog?charset=utf8'
 

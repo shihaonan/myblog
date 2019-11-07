@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import pager %}
+
+
+{% block title %}浩楠的博客首页{% endblock title %}
+
+{% block content %}
+<div >
+{% if posts %}
+    {% for post in posts %}
+        <h2 class="text-primary">
+            <a href="{{ url_for('.show_post',post_id=post.id) }}">{{ post.title }}</a>
+        </h2>
+        <p>
+            {{ post.body|striptags|truncate }}
+            <samll>
+                <a href="{{ url_for('.show_post',post_id=post.id) }}"> »</a>
+            </samll>
+        </p>
+        <p>
+            published at {{ post.timestamp }}
+            | {{post.category.name}}
+        </p>
+    {% endfor %}
+{% endif %}
+
+{{ pager(pagination) }}
+</div>
+{% endblock content %}
