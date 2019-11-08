@@ -1,7 +1,10 @@
 from app.extentions import db
 from datetime import datetime
+from werkzeug.security import generate_password_hash,check_password_hash
+from flask_login import UserMixin
 
-class Admin(db.Model):
+
+class Admin(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))
@@ -9,11 +12,18 @@ class Admin(db.Model):
     def __repr__(self):
         return '用户名：%s' % self.username
 
+    def set_password(self,password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self,password):
+        return check_password_hash(self.password_hash,password)
+
+
 class Bloginfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     blog_title = db.Column(db.String(60))
     blog_sub_title = db.Column(db.String(100))
-    name = db.Column(db.String(30))
+    name = db.Column(db.String(30),default='浩楠')
     about = db.Column(db.Text)
 
 class Category(db.Model):
@@ -44,7 +54,6 @@ class Comment(db.Model):
     replied_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
     replied = db.relationship('Comment', back_populates='replies', remote_side=[id])
     replies = db.relationship('Comment', back_populates='replied', cascade='all')
-
 
 
 

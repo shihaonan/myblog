@@ -58,8 +58,12 @@
 {% endblock %}
 
 <main class="container" id="mainbody">
-    {% block content %}
-    {% endblock content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert">{{ message }}</div>
+    {% endfor %}
+
+    {% block content %} {% endblock content %}
+
     {% block footer %}
     <footer>
 故事发生的地方
