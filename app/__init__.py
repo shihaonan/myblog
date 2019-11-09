@@ -39,6 +39,7 @@ def register_extentions(app):
     migrate = Migrate(app,db)
     toolbar.init_app(app)
     login_manager.init_app(app)
+    csrf.init_app(app)
 
 def register_blueprints(app):
     app.register_blueprint(blog_bp)

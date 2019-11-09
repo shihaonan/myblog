@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title> 后台管理</title>
+    <meta content="Responsive admin theme build on top of Bootstrap 4" name="description" />
+    <meta content="Themesdesign" name="author" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link href="{{ url_for('static', filename='css/icons.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/adminstyle.css') }}" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+<!--        Top Bar Start-->
+        <div class="topbar">
+
+            <!-- LOGO -->
+            <div class="topbar-left">
+                <a href="{{ url_for('.index') }}" class="logo">
+                    <span class="logo-light">
+                        haonan
+                    </span>
+                </a>
+            </div>
+
+            <nav class="navbar-custom">
+                <ul class="navbar-right list-inline float-right mb-0">
+                    <li>
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.logout') }}">退出</a>
+                        {% endif %}
+                    </li>
+
+                    <li class="dropdown notification-list list-inline-item">
+                        <div class="dropdown notification-list nav-pro-img">
+                            <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="{{ url_for('static', filename='images/tx.jpg') }}" alt="user" class="img-circle">
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <ul class="list-inline menu-left mb-0">
+                    <li class="float-left">
+                        <button class="button-menu-mobile open-left waves-effect">
+                            <img src="{{ url_for('static', filename='images/menu.png') }}" alt="user" class="img-circle">
+                        </button>
+                        <span class="float-left alert">
+                            {% for message in get_flashed_messages() %}
+                               {{ message }}
+                            {% endfor %}
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+                        <li class="menu-title">Menu</li>
+
+
+                        <li>
+                            <a href="{{ url_for('admin.new_post') }}" class="waves-effect"><span> 写文章 </span></a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin.manage_post') }}" class="waves-effect"><span> 管理文章 </span></a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin.new_category') }}" class="waves-effect"><span> 新增分类 </span></a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin.manage_category') }}" class="waves-effect"><span> 管理分类 </span></a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('admin.settings') }}" class="waves-effect"><span> 博客设置 </span></a>
+                        </li>
+                         <li>
+                            <a href="{{ url_for('admin.admininfo') }}" class="waves-effect"><span> 管理员账户 </span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container-fluid">
+
+                {% block content %} {% endblock content %}
+
+
+                </div>
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+                © 2019 Powered by shihaonan</span>.
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+
+    {% block scripts %}
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/metismenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+
+    {% endblock %}
+
+
+</body>
+
+</html>

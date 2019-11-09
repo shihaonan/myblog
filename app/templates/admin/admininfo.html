@@ -1,10 +1,11 @@
 {% extends 'admin/base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
 
 {% block content %}
  <div class="page-title-box">
     <div class="row align-items-center">
         <div class="col-sm-6">
-            <h4 class="page-title">Dashboard</h4>
+            <h4 class="page-title">编辑管理员账户</h4>
         </div>
         <div class="col-sm-6">
             <h4 class="page-title float-right">发表</h4>
@@ -15,10 +16,8 @@
                     <!-- end page-title -->
 
 <div>
-    目前文章数量：{{ posts_num }}
+    {{ render_form(form) }}
 </div>
-<div>
-    目前分类数量：{{ categories_num }}
-</div>
+
 
 {% endblock content %}

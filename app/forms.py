@@ -17,6 +17,7 @@ class PostForm(FlaskForm):
     submit = SubmitField()
 
     def __init__(self):
+        super(PostForm, self).__init__()
         self.category.choices = [(category.id,category.name)
                                  for category in Category.query.order_by(Category.name).all()]
 
@@ -33,19 +34,13 @@ class BloginfoFrom(FlaskForm):
     blog_title = StringField('博客标题',validators=[DataRequired(),Length(1,60)])
     blog_sub_title = StringField('博客副标题',validators=[DataRequired(),Length(1,100)])
     name = StringField('拥有者',validators=[Length(1,30)])
-    about = TextField('关于',validators=[DataRequired()])
+    about = CKEditorField('关于',validators=[DataRequired()])
+    submit = SubmitField()
 
-
-
-
-
-
-
-
-
-
-
-
+class AdminForm(FlaskForm):
+    username = StringField('重设管理员账号',validators=[DataRequired(),Length(1,20)])
+    password = PasswordField('重设密码',validators=[DataRequired(),Length(1,128)])
+    submit = SubmitField('提交')
 
 
 

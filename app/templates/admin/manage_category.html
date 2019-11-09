@@ -1,0 +1,57 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+ <div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">分类管理</h4>
+        </div>
+        <div class="col-sm-6">
+            <h5 class="page-title pull-right">新增分类</h5>
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+                    <!-- end page-title -->
+
+<div>
+    {% if categories %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>编号</th>
+            <th>分类ID</th>
+            <th>分类名称</th>
+            <th>下属文章</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        {% for category in categories %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ category.id }}</td>
+            <td><a href=""> {{ category.name }}</a></td>
+            <td><a href=""> {{ category.posts|length }}</a></td>
+            <td>
+                <a class="btn btn-info btn-sm" href="{{ url_for('.edit_category',category_id=category.id) }}">编辑</a>
+                <form class="inline" method="post" action="{{ url_for('.delete_category',category_id=category.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确定删除吗')">删除</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% else %}
+    <h3>没有分类</h3>
+    {% endif %}
+
+
+</div>
+
+
+
+
+
+{% endblock %}

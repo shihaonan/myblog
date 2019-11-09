@@ -4,6 +4,7 @@ from flask_ckeditor import CKEditor
 from flask_moment import Moment
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -11,6 +12,7 @@ moment = Moment()
 ckeditor = CKEditor()
 toolbar = DebugToolbarExtension()
 login_manager = LoginManager()
+csrf = CSRFProtect()
 
 
 @login_manager.user_loader

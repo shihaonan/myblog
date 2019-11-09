@@ -1,0 +1,29 @@
+{% extends 'admin/base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block content %}
+ <div class="page-title-box">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <h4 class="page-title">编辑博客信息</h4>
+        </div>
+        <div class="col-sm-6">
+            <h4 class="page-title float-right">发表</h4>
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+                    <!-- end page-title -->
+
+<div>
+    {{ render_form(form) }}
+</div>
+
+
+{% endblock content %}
+{% block scripts %}
+{{ super() }}
+<!--<script type="text/javascript" src="{{url_for('static',filename='ckeditor/ckeditor.ja')}}"></script>-->
+<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+
+{% endblock %}
