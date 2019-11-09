@@ -36,7 +36,7 @@ def register_extentions(app):
     db.init_app(app)
     moment.init_app(app)
     ckeditor.init_app(app)
-    migrate = Migrate(app,db)
+    migrate.init_app(app,db)
     toolbar.init_app(app)
     login_manager.init_app(app)
     csrf.init_app(app)
