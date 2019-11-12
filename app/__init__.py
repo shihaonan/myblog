@@ -43,7 +43,7 @@ def register_extentions(app):
 
 def register_blueprints(app):
     app.register_blueprint(blog_bp)
-    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(admin_bp, url_prefix='/uadmin')
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
 def register_shell_context(app):
