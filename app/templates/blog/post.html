@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ post.title }}{% endblock title %}
+
+{% block mycss %}
+<link href="{{ url_for('static', filename='editormd/css/editormd.preview.min.css') }}" rel="stylesheet" />
+<link href="{{ url_for('static', filename='editormd/css/editormd.css') }}" rel="stylesheet" />
+{% endblock %}
 
 {% block content %}
 <div class="page-header">
@@ -10,12 +14,18 @@
         Date:{{ post.timestamp }}
     </small>
 </div>
-    {{ post.body|safe }}
-<div>
 
+<div id="fancy-content">
+{{ post.body_html|safe }}
 </div>
+{% endblock %}
 
-
-
-
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript" src="{{ url_for('static', filename='editormd/lib/marked.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='editormd/lib/prettify.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='editormd/editormd.min.js') }}"></script>
+<script type="text/javascript">
+    editormd.markdownToHTML("fancy-content");
+</script>
 {% endblock %}
