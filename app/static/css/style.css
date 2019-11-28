@@ -39,6 +39,13 @@ border-color: #f9f7f7;
 }
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.5;
+    margin-top: 10px;
+}
+.body-header{
+margin-bottom:20px;
+}
+.time{
+color: #908f8f;
 }
 a,a:link, a:active, a:hover {
   color: #3a3a3a;
